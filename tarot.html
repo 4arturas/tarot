@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+
+  <!--<script src="https://unpkg.com/@babel/standalone/babel.min.js" crossorigin="anonymous"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.20.0-alpha.1/antd.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.20.0-alpha.1/antd.compact.css"/>-->
+
+  <script src="src/babel.min.js" crossorigin="anonymous"></script>
+  <script crossorigin src="src/react.production.min.js"></script>
+  <script crossorigin src="src/react-dom.production.min.js"></script>
+
+  <script src="src/antd.min.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="src/antd.compact.css"/>
+
+  <script type="text/javascript" src="images-smith-waite.js"></script>
+  <script type="text/javascript" src="images-Golden-Thread-Tarot-Deck.js"></script>
+  <script type="text/javascript" src="tarotNames.js"></script>
+  <script type="text/babel" src="components/ImageModal.js"></script>
+  <script type="text/babel" src="components/TarotCardPositions.js"></script>
+  <style>
+    img {
+      width:120px
+    }
+    .table { font-size: 10px }
+  </style>
+</head>
+<body>
+
+<div id="root"></div>
+
+
+<script>
+  // https://www.tarot.com/tarot/decks/golden-thread
+  // const images_Golden_Thread_Tarot_Deck = Array.apply(null, Array(arr1.length)).map( (a,idx) => { return 'https://gfx.tarot.com/images/site/decks/golden-thread/mid_size/'+idx+'.jpg'; } );
+  const images_Golden_Thread_Tarot_Deck = Array.apply(null, Array(arr1.length)).map( (a,idx) => { return 'https://gfx.tarot.com/images/site/decks/angel/mid_size/'+idx+'.jpg'; } );
+
+
+</script>
+
+<script type="text/babel">
+  const TarotTable = () => {
+
+    const { Option } = antd.Select;
+
+    const [deckName, setDeckName] = React.useState();
+
+    function chooseDeck( value )
+    {
+      const arr = Array.apply(null, Array(tarotNames.length)).map( (a,idx) => { return value.replace('0.jpg', idx+'.jpg'); } );
+      for ( let i = 0; i < arr.length; i++ )
+      {
+        ReactDOM.render( <ImageModal title={`${i} - ${tarotNames[i]}`} img={arr[i]} idx={i} />, document.getElementById('major' + i) );
+      }
+    }
+    function chooseDeckOnChange( value )
+    {
+      const addr = tarotDecks[value][0];
+      const name = tarotDecks[value][1];
+      setDeckName( name );
+      chooseDeck( addr );
+    }
+
+    React.useEffect( () => {
+      chooseDeck( 'https://gfx.tarot.com/images/site/decks/8-bit/mid_size/0.jpg' );
+    }, [] );
+
+
+    return ( <>
+
+      <antd.Select defaultValue="-1" style={{ width: 220 }} onChange={chooseDeckOnChange} showSearch>
+        <antd.Select.Option value="-1">Choose Deck</antd.Select.Option>
+        { tarotDecks.map( (v, idx) => <antd.Select.Option value={idx}>{v[1]}</antd.Select.Option> ) }
+      </antd.Select>
+
+      <b style={{marginLeft:'20px'}}>{deckName}</b>
+
+      <TarotCardPositions/>
+
+      <br/><br/>
+
+      <table style={{fontSize: '10px'}}>
+        <tbody>
+        <tr>
+          <td id="major0"><img src="https://upload.wikimedia.org/wikipedia/commons/9/90/RWS_Tarot_00_Fool.jpg"/></td>
+          <td id="major1"><img src="https://upload.wikimedia.org/wikipedia/commons/d/de/RWS_Tarot_01_Magician.jpg"/></td>
+          <td id="major2"><img
+                  src="https://upload.wikimedia.org/wikipedia/commons/8/88/RWS_Tarot_02_High_Priestess.jpg"/></td>
+          <td id="major3"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d2/RWS_Tarot_03_Empress.jpg"/></td>
+          <td id="major4"><img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/RWS_Tarot_04_Emperor.jpg"/></td>
+          <td id="major5"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/RWS_Tarot_05_Hierophant.jpg"/>
+          </td>
+          <td id="major6"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/TheLovers.jpg"/></td>
+          <td id="major7"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9b/RWS_Tarot_07_Chariot.jpg"/></td>
+          <td id="major8"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f5/RWS_Tarot_08_Strength.jpg"/></td>
+          <td id="major9"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/RWS_Tarot_09_Hermit.jpg"/></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td id="major10"><img
+                  src="https://upload.wikimedia.org/wikipedia/commons/3/3c/RWS_Tarot_10_Wheel_of_Fortune.jpg"/></td>
+          <td id="major11"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/RWS_Tarot_11_Justice.jpg"/></td>
+          <td id="major12"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2b/RWS_Tarot_12_Hanged_Man.jpg"/>
+          </td>
+          <td id="major13"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/RWS_Tarot_13_Death.jpg"/></td>
+          <td id="major14"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/RWS_Tarot_14_Temperance.jpg"/>
+          </td>
+          <td id="major15"><img src="https://upload.wikimedia.org/wikipedia/commons/5/55/RWS_Tarot_15_Devil.jpg"/></td>
+          <td id="major16"><img src="https://upload.wikimedia.org/wikipedia/commons/5/53/RWS_Tarot_16_Tower.jpg"/></td>
+          <td id="major17"><img src="https://upload.wikimedia.org/wikipedia/commons/d/db/RWS_Tarot_17_Star.jpg"/></td>
+          <td id="major18"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7f/RWS_Tarot_18_Moon.jpg"/></td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td id="major19"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/RWS_Tarot_19_Sun.jpg"/></td>
+          <td id="major20"><img src="https://upload.wikimedia.org/wikipedia/commons/d/dd/RWS_Tarot_20_Judgement.jpg"/>
+          </td>
+          <td id="major21"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/RWS_Tarot_21_World.jpg"/></td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td>&nbsp;</td>
+          <td>1.Beginnings<br/>Active</td>
+          <td>2.Decisions<br/>Passive</td>
+          <td>3.Growth<br/>Active</td>
+          <td>4.Stability<br/>Passive</td>
+          <td>5.Problems<br/>Active</td>
+          <td>6.Solutions<br/>Passive</td>
+          <td>7.Effort<br/>Active</td>
+          <td>8.Movement<br/>Passive</td>
+          <td>9.Completion<br/>Active</td>
+          <td>10.Finality<br/>Passive</td>
+          <td>New Path<br/>Active</td>
+          <td>Action<br/>Passive</td>
+          <td>Patience<br/>Active</td>
+          <td>Knowledge<br/>Passive</td>
+        </tr>
+        <tr>
+          <td>Action<br/>Spirit<br/>Wind<br/><img src="https://w7.pngwing.com/pngs/1020/497/png-transparent-air-alchemical-symbol-water-classical-element-triangle-angle-triangle-libra-thumbnail.png" alt=""/></td>
+          <td id="major22"><img src="https://upload.wikimedia.org/wikipedia/commons/1/11/Wands01.jpg"/></td>
+          <td id="major23"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0f/Wands02.jpg"/></td>
+          <td id="major24"><img src="https://upload.wikimedia.org/wikipedia/commons/f/ff/Wands03.jpg"/></td>
+          <td id="major25"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Wands04.jpg"/></td>
+          <td id="major26"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Wands05.jpg"/></td>
+          <td id="major27"><img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Wands06.jpg"/></td>
+          <td id="major28"><img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Wands07.jpg"/></td>
+          <td id="major29"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Wands08.jpg"/></td>
+          <td id="major30"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4d/Tarot_Nine_of_Wands.jpg"/></td>
+          <td id="major31"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Wands10.jpg"/></td>
+          <td id="major32"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Wands11.jpg"/></td>
+          <td id="major33"><img src="https://upload.wikimedia.org/wikipedia/commons/1/16/Wands12.jpg"/></td>
+          <td id="major34"><img src="https://upload.wikimedia.org/wikipedia/commons/0/0d/Wands13.jpg"/></td>
+          <td id="major35"><img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/Wands14.jpg"/></td>
+        </tr>
+        <tr>
+          <td>Love<br/>Emotion<br/>Water<br/><img src="https://w7.pngwing.com/pngs/410/451/png-transparent-alchemical-symbol-water-classical-element-earth-inverted-triangle-chemical-element-angle-text-thumbnail.png" alt=""/></td>
+          <td id="major36"><img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Cups01.jpg"/></td>
+          <td id="major37"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f8/Cups02.jpg"/></td>
+          <td id="major38"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Cups03.jpg"/></td>
+          <td id="major39"><img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Cups04.jpg"/></td>
+          <td id="major40"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d7/Cups05.jpg"/></td>
+          <td id="major41"><img src="https://upload.wikimedia.org/wikipedia/commons/1/17/Cups06.jpg"/></td>
+          <td id="major42"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ae/Cups07.jpg"/></td>
+          <td id="major43"><img src="https://upload.wikimedia.org/wikipedia/commons/6/60/Cups08.jpg"/></td>
+          <td id="major44"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Cups09.jpg"/></td>
+          <td id="major45"><img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Cups10.jpg"/></td>
+          <td id="major46"><img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Cups11.jpg"/></td>
+          <td id="major47"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Cups12.jpg"/></td>
+          <td id="major48"><img src="https://upload.wikimedia.org/wikipedia/commons/6/62/Cups13.jpg"/></td>
+          <td id="major49"><img src="https://upload.wikimedia.org/wikipedia/commons/0/04/Cups14.jpg"/></td>
+        </tr>
+        <tr>
+          <td>Thought<br/>Logic<br/>Fire<br/><img src="https://w7.pngwing.com/pngs/560/521/png-transparent-alchemical-symbol-fire-classical-element-alchemy-alchemy-angle-rectangle-triangle-thumbnail.png" alt=""/></td>
+          <td id="major50"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Swords01.jpg"/></td>
+          <td id="major51"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Swords02.jpg"/></td>
+          <td id="major52"><img src="https://upload.wikimedia.org/wikipedia/commons/0/02/Swords03.jpg"/></td>
+          <td id="major53"><img src="https://upload.wikimedia.org/wikipedia/commons/b/bf/Swords04.jpg"/></td>
+          <td id="major54"><img src="https://upload.wikimedia.org/wikipedia/commons/2/23/Swords05.jpg"/></td>
+          <td id="major55"><img src="https://upload.wikimedia.org/wikipedia/commons/2/29/Swords06.jpg"/></td>
+          <td id="major56"><img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Swords07.jpg"/></td>
+          <td id="major57"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a7/Swords08.jpg"/></td>
+          <td id="major58"><img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Swords09.jpg"/></td>
+          <td id="major59"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords10.jpg"/></td>
+          <td id="major60"><img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Swords11.jpg"/></td>
+          <td id="major61"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b0/Swords12.jpg"/></td>
+          <td id="major62"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Swords13.jpg"/></td>
+          <td id="major63"><img src="https://upload.wikimedia.org/wikipedia/commons/3/33/Swords14.jpg"/></td>
+        </tr>
+        <tr>
+          <td>Money<br/>Material<br/>Earth<br/><img src="https://w7.pngwing.com/pngs/304/626/png-transparent-earth-symbol-alchemical-symbol-classical-element-air-agua-angle-text-rectangle-thumbnail.png" alt=""/></td>
+          <td id="major64"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Pents01.jpg"/></td>
+          <td id="major65"><img src="https://upload.wikimedia.org/wikipedia/commons/9/9f/Pents02.jpg"/></td>
+          <td id="major66"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents03.jpg"/></td>
+          <td id="major67"><img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Pents04.jpg"/></td>
+          <td id="major68"><img src="https://upload.wikimedia.org/wikipedia/commons/9/96/Pents05.jpg"/></td>
+          <td id="major69"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Pents06.jpg"/></td>
+          <td id="major70"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/Pents07.jpg"/></td>
+          <td id="major71"><img src="https://upload.wikimedia.org/wikipedia/commons/4/49/Pents08.jpg"/></td>
+          <td id="major72"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f0/Pents09.jpg"/></td>
+          <td id="major73"><img src="https://upload.wikimedia.org/wikipedia/commons/4/42/Pents10.jpg"/></td>
+          <td id="major74"><img src="https://upload.wikimedia.org/wikipedia/commons/e/ec/Pents11.jpg"/></td>
+          <td id="major75"><img src="https://upload.wikimedia.org/wikipedia/commons/d/d5/Pents12.jpg"/></td>
+          <td id="major76"><img src="https://upload.wikimedia.org/wikipedia/commons/8/88/Pents13.jpg"/></td>
+          <td id="major77"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/Pents14.jpg"/></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </> )
+  }
+</script>
+
+<script type="text/babel">
+  const App = () => {
+    const [liked, setLiked] = React.useState(false);
+    // if (liked) return <p>You liked this</p>
+    return <div>
+
+      <antd.Button type="primary" onClick={() => setLiked(true)}>Primary Button</antd.Button>
+      <TarotTable/>
+    </div>
+  };
+</script>
+<script type="text/babel">
+  ReactDOM.render(
+          <App />,
+          document.getElementById('root')
+  );
+</script>
+
+
+
+
+
+</body>
+</html>
