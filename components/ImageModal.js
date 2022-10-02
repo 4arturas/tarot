@@ -26,9 +26,23 @@ const ImageModal = ({title, img, idx}) => {
     ];
 
     return (<>
-        <antd.Tooltip title={shorts[idx]}>
-            <img src={img} alt="" onClick={() => setIsModalOpen(true)} style={{cursor:'pointer'}}/>
+        <antd.Tooltip title={`[${shorts[idx]}] - [${shorts2[idx]}]`}>
+
         </antd.Tooltip>
+
+            <antd.Popover
+                content={
+                <div style={{backgroundColor: 'black', color: 'white', padding: '10px'}}>
+                    <div>{shorts[idx]}</div>
+                    <hr/>
+                    <div>{shorts2[idx]}</div>
+                </div>
+                }
+                title={tarotNames[idx]}
+            >
+                <img src={img} alt="" onClick={() => setIsModalOpen(true)} style={{cursor:'pointer'}}/>
+            </antd.Popover>
+
         <antd.Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} width={800}>
             <table>
                 <tbody>

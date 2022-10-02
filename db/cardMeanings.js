@@ -1,0 +1,1 @@
+// https://www.aeclectic.net/tarot/learn/meanings/
