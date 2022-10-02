@@ -19,10 +19,11 @@
   <link rel="stylesheet" href="src/antd.compact.css"/>
 
   <script type="text/javascript" src="images-smith-waite.js"></script>
-  <script type="text/javascript" src="images-Golden-Thread-Tarot-Deck.js"></script>
   <script type="text/javascript" src="tarotNames.js"></script>
   <script type="text/babel" src="components/ImageModal.js"></script>
   <script type="text/babel" src="components/TarotCardPositions.js"></script>
+  <script type="text/javascript" src="db/archetypalJourney.js"></script>
+  <script type="text/javascript" src="db/shorts.js"></script>
   <style>
     img {
       width:120px
@@ -55,7 +56,7 @@
       const arr = Array.apply(null, Array(tarotNames.length)).map( (a,idx) => { return value.replace('0.jpg', idx+'.jpg'); } );
       for ( let i = 0; i < arr.length; i++ )
       {
-        ReactDOM.render( <ImageModal title={`${i} - ${tarotNames[i]}`} img={arr[i]} idx={i} />, document.getElementById('major' + i) );
+        ReactDOM.render(<ImageModal title={`${i} - ${tarotNames[i]}`} img={arr[i]} idx={i} /> , document.getElementById('major' + i) );
       }
     }
     function chooseDeckOnChange( value )
@@ -72,6 +73,8 @@
 
 
     return ( <>
+
+      <span style={{ fontWeight:'bold', marginLeft: '20px', marginRight:'10px' }}>Decks:</span>
 
       <antd.Select defaultValue="-1" style={{ width: 220 }} onChange={chooseDeckOnChange} showSearch>
         <antd.Select.Option value="-1">Choose Deck</antd.Select.Option>
@@ -228,8 +231,6 @@
     const [liked, setLiked] = React.useState(false);
     // if (liked) return <p>You liked this</p>
     return <div>
-
-      <antd.Button type="primary" onClick={() => setLiked(true)}>Primary Button</antd.Button>
       <TarotTable/>
     </div>
   };
