@@ -22,9 +22,11 @@
   <script type="text/javascript" src="tarotNames.js"></script>
   <script type="text/babel" src="components/ImageModal.js"></script>
   <script type="text/babel" src="components/TarotCardPositions.js"></script>
+  <script type="text/babel" src="components/TableTarot.js"></script>
   <script type="text/javascript" src="db/archetypalJourney.js"></script>
   <script type="text/javascript" src="db/shorts.js"></script>
   <script type="text/javascript" src="db/shorts2.js"></script>
+  <script type="text/javascript" src="db/shorts3.js"></script>
   <style>
     img {
       width:120px
@@ -137,20 +139,21 @@
         </tr>
         <tr>
           <td>&nbsp;</td>
-          <td>1.Beginnings<br/>Active</td>
-          <td>2.Decisions<br/>Passive</td>
-          <td>3.Growth<br/>Active</td>
-          <td>4.Stability<br/>Passive</td>
-          <td>5.Problems<br/>Active</td>
-          <td>6.Solutions<br/>Passive</td>
-          <td>7.Effort<br/>Active</td>
-          <td>8.Movement<br/>Passive</td>
-          <td>9.Completion<br/>Active</td>
-          <td>10.Finality<br/>Passive</td>
-          <td>New Path<br/>Active</td>
-          <td>Action<br/>Passive</td>
-          <td>Patience<br/>Active</td>
-          <td>Knowledge<br/>Passive</td>
+          <td>1.Beginnings<br/>Active/Change</td>
+          <td>2.Decisions/Crossroad<br/>Passive/Stability</td>
+          <td>3.Growth/Initial achievement<br/>Active/Change</td>
+          <td>4.Stability<br/>Passive/Stability</td>
+          <td>5.Problems/Instability<br/>Active/Change</td>
+          <td>6.Solutions/Relaxation, Adjustment<br/>Passive/Stability</td>
+          <td>7.Effort/Reflection<br/>Active/Change</td>
+          <td>8.Movement<br/>Passive/Stability</td>
+          <td>9.Completion<br/>Active/Change</td>
+          <td>10.Finality/Abundance<br/>Passive/Stability</td>
+          
+          <td>New Path/Conceive idea<br/>Passive/Stability</td>
+          <td>Action/Act on idea<br/>Active/Change</td>
+          <td>Patience/Nurture an idea<br/>Passive/Stability</td>
+          <td>Knowledge/Develop an idea<br/>Active/Change</td>
         </tr>
         <tr>
           <td>Action<br/>Spirit<br/>Wind<br/><img src="https://w7.pngwing.com/pngs/1020/497/png-transparent-air-alchemical-symbol-water-classical-element-triangle-angle-triangle-libra-thumbnail.png" alt=""/></td>
@@ -232,6 +235,7 @@
     const [liked, setLiked] = React.useState(false);
     // if (liked) return <p>You liked this</p>
     return <div>
+      <div><TableTarot/></div>
       <TarotTable/>
     </div>
   };

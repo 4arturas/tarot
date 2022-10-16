@@ -26,7 +26,7 @@ const ImageModal = ({title, img, idx}) => {
     ];
 
     return (<>
-        <antd.Tooltip title={`[${shorts[idx]}] - [${shorts2[idx]}]`}>
+        <antd.Tooltip title={`[${shorts[idx]}] - [${shorts2[idx]}] - [${shorts3[idx]}]`}>
 
         </antd.Tooltip>
 
@@ -36,6 +36,8 @@ const ImageModal = ({title, img, idx}) => {
                     <div>{shorts[idx]}</div>
                     <hr/>
                     <div>{shorts2[idx]}</div>
+                    <hr/>
+                    <div>{shorts3[idx]}</div>
                 </div>
                 }
                 title={tarotNames[idx]}
