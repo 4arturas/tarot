@@ -25,32 +25,39 @@ export default {
             this.annakTarotSystem.send( event );
         }
     },
-    template:
-        `<div>
-            <div>{{state.value}}</div>
-<!--        <div>{{state.context}}</div>-->
-            <span v-for="(img, idx) in context.images">
-                <div v-if="idx===0">Major Arcana</div>
-                <div v-if="idx===22">Minor Arcana</div>
-                
-                <div v-if="idx===22">Cups</div>
-                <div v-if="idx===34">Pentacles</div>
-                <div v-if="idx===46">Wands</div>
-                <div v-if="idx===58">Swords</div>
-                
-                <span style="padding: 5px">
-                    <Card :title="idx" :img="img" :key="idx"/>
-                </span>            
-                
-                <br v-if="idx===9" title="Major"/>
-                <br v-if="idx===19" title="Major"/>
-                <br v-if="idx===21" title="Major"/>
-                
-                <br v-if="idx===33" title="Pentacles"/>
-                
-                <br v-if="idx===57" title="Wands" />
-                
-                                                            
-            </span>        
-        </div>`
+    template: `
+<v-app>
+    <v-card class="mx-auto" append-icon="mdi-human-greeting">
+      <template v-slot:title>
+        AnnaK Tarot
+      </template>
+      <v-card-text>
+        <div>{{state.value}}</div>
+    <!--        <div>{{state.context}}</div>-->
+        <span v-for="(img, idx) in context.images">
+            <div v-if="idx===0">Major Arcana</div>
+            <div v-if="idx===22">Minor Arcana</div>
+            
+            <div v-if="idx===22">Cups</div>
+            <div v-if="idx===34">Pentacles</div>
+            <div v-if="idx===46">Wands</div>
+            <div v-if="idx===58">Swords</div>
+            
+            <span style="padding: 5px">
+                <Card :title="idx" :img="img" :key="idx"/>
+            </span>            
+            
+            <br v-if="idx===9" title="Major"/>
+            <br v-if="idx===19" title="Major"/>
+            <br v-if="idx===21" title="Major"/>
+            
+            <br v-if="idx===33" title="Pentacles"/>
+            
+            <br v-if="idx===57" title="Wands" />                
+                                                        
+        </span> 
+      </v-card-text>
+    </v-card>
+</v-app>
+`
 }

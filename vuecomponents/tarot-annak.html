@@ -8,18 +8,29 @@
     <script src="assets/annak-assets.js"></script>
     <script src="assets/annak-texts.js"></script>
 
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font@4.x/css/materialdesignicons.min.css" rel="stylesheet"/>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@3.1.4/dist/vuetify.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/vuetify@3.1.4/dist/vuetify.min.js"></script>
+
     <script type="module" src="modules/Card.js"></script>
 </head>
 <body>
 <div id="app"></div>
 
 <script type="module">
-
-    import * as VUE from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
-
     import AnnaTarot from './modules/annaktarot.js';
 
-    VUE.createApp(AnnaTarot).mount('#app')
+    const { createApp } = Vue;
+    const { createVuetify } = Vuetify;
+
+
+    const vuetify = createVuetify();
+
+    const app = createApp(AnnaTarot)
+        .use(vuetify)
+        .mount("#app");
 
 </script>
 </body>
