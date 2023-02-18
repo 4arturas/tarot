@@ -17,11 +17,15 @@ export default {
     created() {
         this.tarotTableSystem
             .onTransition( (state) => {
+                /*if ( state.matches('show_images') ) {
+                    this.$router.push('/about');
+                }*/
                 this.state = state;
                 this.context = state.context;
             })
             .start();
         this.send('LOAD_IMAGES_AND_TEXTS');
+        // this.$router.push('/about');
     },
     methods: {
         send( event ) {
@@ -33,6 +37,8 @@ export default {
     <template v-slot:title>
         Major Arcana
     </template>
+    <div><b>State:</b> {{tarotTableSystem.state.value}}</div>
+    <div>{{router}}</div>
     <span v-for="(img, idx) in context.images.slice(0,22)" style="padding: 5px">        
         <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>
     </span>
