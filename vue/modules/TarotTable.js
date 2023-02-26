@@ -33,12 +33,12 @@ export default {
         }
     },
     template: `
+
 <v-card class="mx-auto" append-icon="" style="margin: 15px">
     <template v-slot:title>
         Major Arcana
     </template>
     <div><b>State:</b> {{tarotTableSystem.state.value}}</div>
-    <div>{{router}}</div>
     <span v-for="(img, idx) in context.images.slice(0,22)" style="padding: 5px">        
         <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>
     </span>

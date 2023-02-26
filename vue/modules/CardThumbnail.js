@@ -5,13 +5,16 @@ export default {
     },
     data() {
         return {
-            src: '/img/annak/' + this.img,
             href: '/card/' + this.idx
         }
     },
     template: `
 <router-link :to="href">
-    <img alt="" :src="src" style="width:100px"/>
+    <img alt="" :src="'/img/annak/' + img" style="width:100px"/>
+    <!--<v-img
+        style="width:100px;"
+        :src="'/img/annak/' + img"
+    ></v-img>--> 
 </router-link>        
 `
 }

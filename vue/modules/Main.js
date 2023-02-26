@@ -11,7 +11,7 @@ export default {
             <tbody>
                 <tr>
                     <td><router-link to="/" style="text-decoration: none; color:black;">AnnaK Tarot</router-link>&nbsp;&nbsp;&nbsp;</td>
-                    <td><router-link to="/about">Go to About</router-link></td>
+                    <td><router-link to="/about">About</router-link></td>
                 </tr>
             </tbody>
         </table>

@@ -64,7 +64,6 @@ export default {
                         <v-img
                             style="width:200px"
                             class="bg-white"
-                            :aspect-ratio="1"
                             :src="'/img/annak/' + state.context.img"
                             cover
                         ></v-img>                                 
