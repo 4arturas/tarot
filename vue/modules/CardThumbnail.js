@@ -10,7 +10,7 @@ export default {
     },
     template: `
 <router-link :to="href">
-    <img alt="" :src="'/img/annak/' + img" style="width:100px"/>
+    <img alt="" :src="'/img/annak/' + img" style="width:95px"/>
     <!--<v-img
         style="width:100px;"
         :src="'/img/annak/' + img"

@@ -53,7 +53,7 @@ export default {
         <template v-slot:title>
             Cups
         </template>
-        <span v-for="(img, idx) in context.images.slice(22, 34)" style="padding: 5px">
+        <span v-for="(img, idx) in context.images.slice(22, 36)" style="padding: 5px">
             <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>
         </span>
     </v-card>
@@ -62,7 +62,7 @@ export default {
         <template v-slot:title>
             Pentacles
         </template>
-        <span v-for="(img, idx) in context.images.slice(34, 46)" style="padding: 5px">
+        <span v-for="(img, idx) in context.images.slice(36, 50)" style="padding: 5px">
             <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>
         </span>
     </v-card>
@@ -71,7 +71,7 @@ export default {
         <template v-slot:title>
             Wands
         </template>
-        <span v-for="(img, idx) in context.images.slice(46, 58)" style="padding: 5px">
+        <span v-for="(img, idx) in context.images.slice(50, 64)" style="padding: 5px">
             <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>            
         </span>
     </v-card>
@@ -80,7 +80,7 @@ export default {
         <template v-slot:title>
             Swords
         </template>
-        <span v-for="(img, idx) in context.images.slice(58, 70)" style="padding: 5px">
+        <span v-for="(img, idx) in context.images.slice(64, 78)" style="padding: 5px">
             <CardThumbnail :idx="cardIdx++" :img="img" :key="idx"/>
         </span>
     </v-card>
