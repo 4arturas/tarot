@@ -59,6 +59,7 @@ const ImageModal = ({title, img, idx}) => {
                 </tbody>
             </table>
         </antd.Modal>
+            <div>{shorts4[idx]}</div>
         </>
     );
 }
