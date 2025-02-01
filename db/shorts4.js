@@ -67,7 +67,7 @@ const shorts4 = [
     'A self sufficient person',
     'Strategic thought',
 
-    'new job, raise, promotion, investment, new income',
+    'New income',
     'Two choices',
     'Teamwork',
     'Greed',
