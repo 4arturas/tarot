@@ -10,16 +10,18 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/5.26.5/antd.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/antd/5.26.5/reset.min.css" rel="stylesheet">
   <script type="text/javascript" src="images-smith-waite.js"></script>
-  <script type="text/javascript" src="tarotNames.js"></script>
-  <script type="text/javascript" src="tarotVideos.js"></script>
-  <script type="text/babel" src="components/ImageModal.js"></script>
-  <script type="text/babel" src="components/TarotCardPositions.js"></script>
-  <script type="text/babel" src="components/TableTarot.js"></script>
-  <script type="text/javascript" src="db/archetypalJourney.js"></script>
-  <script type="text/javascript" src="db/shorts.js"></script>
-  <script type="text/javascript" src="db/shorts2.js"></script>
-  <script type="text/javascript" src="db/shorts3.js"></script>
-  <script type="text/javascript" src="db/shorts4.js"></script>
+  <script type="text/javascript" src="js/tarotNames.js"></script>
+  <script type="text/javascript" src="js/tarotVideos.js"></script>
+  <script type="text/javascript" src="js/tarotMeaning.js"></script>
+  <script type="text/javascript" src="js/tarotDecks.js"></script>
+  <script type="text/babel" src="js/components/ImageModal.js"></script>
+  <script type="text/babel" src="js/components/TarotCardPositions.js"></script>
+  <script type="text/babel" src="js/components/TableTarot.js"></script>
+  <script type="text/javascript" src="js/db/archetypalJourney.js"></script>
+  <script type="text/javascript" src="js/db/shorts.js"></script>
+  <script type="text/javascript" src="js/db/shorts2.js"></script>
+  <script type="text/javascript" src="js/db/shorts3.js"></script>
+  <script type="text/javascript" src="js/db/shorts4.js"></script>
   <style>
     img {
       width: 120px
@@ -28,11 +30,8 @@
 </head>
 <body>
 <div id="root"></div>
-<script>
-  const images_Golden_Thread_Tarot_Deck = Array.apply(null, Array(arr1.length)).map((a, idx) => {
-    return 'https://gfx.tarot.com/images/site/decks/angel/mid_size/' + idx + '.jpg';
-  });
-</script>
+
+
 <script type="text/babel">
   const TarotTableComponent = ({ useLocalImages }) => {
     return (
