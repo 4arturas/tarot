@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Celtic Cross Tarot Spread</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/5.26.5/antd.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/antd/5.26.5/reset.min.css" rel="stylesheet">
+    <script type="text/javascript" src="tarotNames.js"></script>
+    <style>
+        img {
+            width: 120px;
+        }
+        .cross-layout {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin-right: 50px;
+            position: relative;
+        }
+        .cross-row {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-left: 50px;
+        }
+        .card-list img {
+            margin: 10px;
+        }
+        .container {
+            display: flex;
+            justify-content: center;
+        }
+        .rotated-card {
+            position: absolute;
+            transform: rotate(60deg);
+            transform-origin: center;
+            margin-left: -40px;
+            margin-top: -20px;
+        }
+        .card-3 {
+            margin-bottom: 50px;
+        }
+        .card-4 {
+            margin-top: 100px;
+        }
+        .card-5 {
+            margin-right: 100px;
+        }
+        .card-6 {
+            margin-left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const ImageModal = ({ title, img, idx }) => {
+        const [isModalVisible, setIsModalVisible] = useState(false);
+
+        const showModal = () => {
+            setIsModalVisible(true);
+        };
+
+        const handleOk = () => {
+            setIsModalVisible(false);
+        };
+
+        const handleCancel = () => {
+            setIsModalVisible(false);
+        };
+
+        return (
+            <>
+                <img src={img} alt={title} onClick={showModal} style={{ cursor: 'pointer' }} />
+                <antd.Modal title={title} visible={isModalVisible} onOk={handleOk} onCancel={handleCancel} footer={null}>
+                    <img src={img} alt={title} style={{ width: '100%' }} />
+                </antd.Modal>
+            </>
+        );
+    };
+
+    const CelticCrossLayout = ({ useLocalImages, deckName }) => {
+        const [cards, setCards] = useState([]);
+
+        useEffect(() => {
+            const shuffledCards = [...Array(78).keys()].sort(() => Math.random() - 0.5).slice(0, 10);
+            setCards(shuffledCards);
+        }, [deckName]);
+
+        const reshuffle = () => {
+            const shuffledCards = [...Array(78).keys()].sort(() => Math.random() - 0.5).slice(0, 10);
+            setCards(shuffledCards);
+        };
+
+        const getCardImage = (index) => {
+            if (useLocalImages) {
+                const deckDir = deckName.replace(/ /g, '_');
+                return `tarot_images/${deckDir}/${index}.jpg`;
+            }
+            const selectedDeck = tarotDecks.find(deck => deck[1] === deckName);
+            if (selectedDeck) {
+                return selectedDeck[0].replace('0.jpg', `${index}.jpg`);
+            }
+            return `https://gfx.tarot.com/images/site/decks/8-bit/mid_size/${index}.jpg`;
+        };
+
+        return (
+            <div className="container">
+                <div className="cross-layout">
+                    <div className="cross-row card-3">
+                        <div id={`card-${cards[2]}`}>
+                            <ImageModal title={`${cards[2]} - ${tarotNames[cards[2]]}`} img={getCardImage(cards[2])} idx={cards[2]} />
+                        </div>
+                    </div>
+                    <div className="cross-row">
+                        <div className="card-5">
+                            <div id={`card-${cards[4]}`}>
+                                <ImageModal title={`${cards[4]} - ${tarotNames[cards[4]]}`} img={getCardImage(cards[4])} idx={cards[4]} />
+                            </div>
+                        </div>
+                        <div id={`card-${cards[0]}`} style={{ position: 'relative' }}>
+                            <ImageModal title={`${cards[0]} - ${tarotNames[cards[0]]}`} img={getCardImage(cards[0])} idx={cards[0]} />
+                            <div className="rotated-card" style={{ top: '50%', left: '50%' }}>
+                                <ImageModal title={`${cards[1]} - ${tarotNames[cards[1]]}`} img={getCardImage(cards[1])} idx={cards[1]} />
+                            </div>
+                        </div>
+                        <div className="card-6">
+                            <div id={`card-${cards[5]}`}>
+                                <ImageModal title={`${cards[5]} - ${tarotNames[cards[5]]}`} img={getCardImage(cards[5])} idx={cards[5]} />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="cross-row card-4">
+                        <div id={`card-${cards[3]}`}>
+                            <ImageModal title={`${cards[3]} - ${tarotNames[cards[3]]}`} img={getCardImage(cards[3])} idx={cards[3]} />
+                        </div>
+                    </div>
+                </div>
+                <div className="card-list">
+                    {cards.slice(6, 10).map((card, index) => (
+                        <div key={index} id={`card-${card}`}>
+                            <ImageModal title={`${card} - ${tarotNames[card]}`} img={getCardImage(card)} idx={card} />
+                        </div>
+                    ))}
+                </div>
+                <antd.Button type="primary" onClick={reshuffle}>Reshuffle</antd.Button>
+            </div>
+        );
+    };
+
+    const App = () => {
+        const { Option } = antd.Select;
+        const [deckName, setDeckName] = useState('8-Bit Tarot Deck');
+        const [useLocalImages, setUseLocalImages] = useState(false);
+
+        const chooseDeckOnChange = (value) => {
+            const name = tarotDecks[value][1];
+            setDeckName(name);
+        };
+
+        return (
+            <div>
+                <antd.Checkbox checked={useLocalImages} onChange={(e) => setUseLocalImages(e.target.checked)}>Use Local Images</antd.Checkbox>
+                <span style={{ fontWeight: 'bold', marginLeft: '20px', marginRight: '10px' }}>Decks:</span>
+                <antd.Select defaultValue="0" style={{ width: 220 }} onChange={chooseDeckOnChange}>
+                    {tarotDecks.map((v, idx) => (
+                        <antd.Select.Option key={idx} value={idx}>{v[1]}</antd.Select.Option>
+                    ))}
+                </antd.Select>
+                <b style={{ marginLeft: '20px' }}>{deckName}</b>
+                <CelticCrossLayout useLocalImages={useLocalImages} deckName={deckName} />
+            </div>
+        );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+</script>
+</body>
+</html>
