@@ -59,6 +59,13 @@
         .card-4 { margin-top: 100px; }
         .card-5 { margin-right: 100px; }
         .card-6 { margin-left: 100px; }
+        .verse {
+            white-space: pre-line;
+            font-style: italic;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 16px;
+        }
     </style>
 </head>
 <body>
@@ -89,14 +96,29 @@
         return url.replace('0.jpg', `${index}.jpg`);
     };
 
-    function Card({ card, deckIdx, useLocalImages }) {
+    // Fragments of eilerastis.txt, one per spread position (index 0 = position 1).
+    const positionVerses = [
+        'Первый скажет, что сейчас,\nЧто волнует в данный час.',
+        'Двойка ляжет поперёк:\nЧто мешает, что не впрок.',
+        'Тройку сверху расположим —\nЭто то, что мысль гложет.',
+        'А четвёрку вниз кладём,\nЧувства мы по ней прочтём.',
+        'Пятый слева нам расскажет,\nЧто прошло и что забыто.',
+        'А шестой направо ляжет —\nЧто грядёт, пока что скрыто.',
+        'Связан здесь аркан седьмой\nНепосредственно с тобой.',
+        'Номер восемь — весь твой круг:\nКто твой недруг, кто твой друг.',
+        'А в девятке два значенья —\nЧаянья и опасенья:\nКак надежда — в позитиве\nИ как страхи — в негативе.',
+        'Вот десятка наконец,\nИ она всему венец:\nКак проблема разрешится,\nСтоит ли чего страшиться, —\nВсё расскажет кельтский крест:\nЧто ушло, придёт и есть.',
+    ];
+
+    function Card({ card, position, deckIdx, useLocalImages }) {
         const [open, setOpen] = useState(false);
         const title = `${card} - ${tarotNames[card]}`;
         const img = getCardImage(card, deckIdx, useLocalImages);
         return (
             <>
                 <img src={img} alt={title} onClick={() => setOpen(true)} style={{ cursor: 'pointer' }} />
-                <Modal title={title} open={open} onCancel={() => setOpen(false)} footer={null}>
+                <Modal title={`${position + 1}. ${title}`} open={open} onCancel={() => setOpen(false)} footer={null}>
+                    <p className="verse">{positionVerses[position]}</p>
                     <img src={img} alt={title} style={{ width: '100%' }} />
                 </Modal>
             </>
@@ -104,7 +126,7 @@
     }
 
     function CelticCross({ cards, deckIdx, useLocalImages }) {
-        const card = (i) => <Card card={cards[i]} deckIdx={deckIdx} useLocalImages={useLocalImages} />;
+        const card = (i) => <Card card={cards[i]} position={i} deckIdx={deckIdx} useLocalImages={useLocalImages} />;
         return (
             <div className="container">
                 <div className="cross-layout">
